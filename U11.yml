@@ -6,40 +6,42 @@ groups:
       - 2
     times:
       - 10:00
-      - 10:40
-      - 11:20
-      - 11:30
-      - 12:40
+      - 11:00
+      - 12:00
   B:
     locations:
       - 1
       - 2
     times:
-      - 10:20
-      - 11:00
-      - 11:40
-      - 12:20
-      - 13:00
+      - 10:30
+      - 11:30
+      - 12:30
   C:
     locations:
       - 3
       - 4
     times:
       - 10:00
-      - 10:40
-      - 11:20
-      - 11:30
-      - 12:40
+      - 11:00
+      - 12:00
   D:
     locations:
       - 3
       - 4
     times:
-      - 10:20
+      - 10:30
+      - 11:30
+      - 12:30
+  E:
+    locations:
+      - 5
+    times:
+      - 10:00
+      - 10:30
       - 11:00
-      - 11:40
-      - 12:20
-      - 13:00
+      - 11:30
+      - 12:00
+      - 12:30
 clubs:
   Blackheath FC:
     -
@@ -51,64 +53,64 @@ clubs:
   Dartfordians RFC:
     -
       name: Dartfordians 1
-      group: A
+      group: C
     -
       name: Dartfordians 2
-      group: B
+      group: D
     -
       name: Dartfordians 3
-      group: C
+      group: E
   Hampstead RFC:
     -
       name: Hampstead RFC
-      group: D
+      group: A
   Medway RFC:
     -
       name: Medway RFC
-      group: C
+      group: B
   Old Colfeians RFC:
     -
       name: Old Colfeians RFC
-      group: D
+      group: C
   Old Elthamians RFC:
     -
       name: Old Elthamians 1
-      group: A
+      group: D
     -
       name: Old Elthamians 2
-      group: B
+      group: E
   Sevenoaks RFC:
     -
       name: Sevenoaks 1
-      group: C
+      group: A
     -
       name: Sevenoaks 2
-      group: D
+      group: B
   Sidcup RFC:
     -
       name: Sidcup 1
-      group: A
+      group: C
     -
       name: Sidcup 2
-      group: B
+      group: D
   Tonbridge Juddians RFC:
     -
       name: Tonbridge Juddians 1
-      group: C
+      group: E
     -
       name: Tonbridge Juddians 2
-      group: D
+      group: A
   Tunbridge Wells RFC:
     -
       name: Tunbridge Wells 1
-      group: A
+      group: B
     -
       name: Tunbridge Wells 2
-      group: B
+      group: C
   Westcombe Park RFC:
     -
       name: Westcombe Park 1
-      group: C
+      group: D
     -
       name: Westcombe Park 2
-      group: D
+      group: E
