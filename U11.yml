@@ -8,6 +8,7 @@ groups:
       - 10:00
       - 11:00
       - 12:00
+      - 13:00
   B:
     locations:
       - 1
@@ -24,6 +25,7 @@ groups:
       - 10:00
       - 11:00
       - 12:00
+      - 13:00
   D:
     locations:
       - 3
@@ -50,6 +52,13 @@ clubs:
     -
       name: Blackheath 2
       group: B
+  Cranbrook RFC:
+    -
+      name: Cranbrook 1
+      group: A
+    -
+      name: Cranbrook 2
+      group: C
   Dartfordians RFC:
     -
       name: Dartfordians 1

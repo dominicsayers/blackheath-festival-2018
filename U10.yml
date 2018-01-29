@@ -4,7 +4,6 @@ groups:
     locations:
       - 1
       - 2
-      - 3
     times:
       - 10:00
       - 10:40
@@ -26,16 +25,15 @@ groups:
       - 3
       - 4
     times:
-      - 10:20
-      - 11:00
-      - 11:40
-      - 12:20
-      - 13:00
+      - 10:00
+      - 10:40
+      - 11:20
+      - 11:30
+      - 12:40
   D:
     locations:
-      - 5
-      - 6
-      - 7
+      - 3
+      - 4
     times:
       - 10:20
       - 11:00
@@ -54,8 +52,18 @@ groups:
       - 12:40
   F:
     locations:
+      - 5
+      - 6
+    times:
+      - 10:20
+      - 11:00
+      - 11:40
+      - 12:20
+      - 13:00
+  E:
+    locations:
       - 7
-      - 4
+      - 8
     times:
       - 10:00
       - 10:40
@@ -93,6 +101,13 @@ clubs:
     -
       name: Cambridge 3
       group: C
+  Cranbrook RFC:
+    -
+      name: Cranbrook 1
+      group: G
+    -
+      name: Cranbrook 2
+      group: F
   Dartfordians RFC:
     -
       name: Dartfordians 1
@@ -109,8 +124,11 @@ clubs:
       group: D
   Medway RFC:
     -
-      name: Medway RFC
+      name: Medway 1
       group: A
+    -
+      name: Medway 2
+      group: G
   Old Colfeians RFC:
     -
       name: Old Colfeians 1
@@ -130,7 +148,7 @@ clubs:
       group: B
     -
       name: Old Elthamians 2
-      group: F
+      group: G
     -
       name: Old Elthamians 3
       group: D
@@ -144,7 +162,7 @@ clubs:
   Sidcup RFC:
     -
       name: Sidcup 1
-      group: D
+      group: G
     -
       name: Sidcup 2
       group: C
@@ -171,4 +189,4 @@ clubs:
       group: C
     -
       name: Westcombe Park 2
-      group: A
+      group: G
