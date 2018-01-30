@@ -1,4 +1,6 @@
-Time,Pitch 1,Pitch 2
-10:30,Sevenoaks 2 v Tunbridge Wells 1,Blackheath 2 v Medway RFC
-11:30,Medway RFC v Tunbridge Wells 1,Blackheath 2 v Sevenoaks 2
-12:30,Medway RFC v Sevenoaks 2,Blackheath 2 v Tunbridge Wells 1
+Time,Pitch 1,Pitch 2,Pitch 3
+10:30,Old Colfeians RFC v Sevenoaks 2,Blackheath 2 v Tonbridge Juddians 2,Dartfordians 2 v Westcombe Park 2
+11:30,Sevenoaks 2 v Tonbridge Juddians 2,Dartfordians 2 v Old Colfeians RFC,Blackheath 2 v Westcombe Park 2
+12:30,Blackheath 2 v Sevenoaks 2,Old Colfeians RFC v Westcombe Park 2,Dartfordians 2 v Tonbridge Juddians 2
+13:30,Old Colfeians RFC v Tonbridge Juddians 2,Sevenoaks 2 v Westcombe Park 2,Blackheath 2 v Dartfordians 2
+14:30,Dartfordians 2 v Sevenoaks 2,Tonbridge Juddians 2 v Westcombe Park 2,Blackheath 2 v Old Colfeians RFC
