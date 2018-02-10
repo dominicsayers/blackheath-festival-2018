@@ -6,40 +6,26 @@ groups:
       - 2
     times:
       - 10:00
-      - 10:50
-      - 11:40
+      - 10:40
+      - 11:20
+      - 12:00
       - 12:30
-      - 13:20
   B:
-    locations:
-      - 1
-      - 2
-    times:
-      - 10:25
-      - 11:15
-      - 12:05
-      - 12:55
-      - 13:45
-  C:
     locations:
       - 3
       - 4
     times:
       - 10:00
-      - 10:50
-      - 11:40
-      - 12:30
-      - 13:20
-  D:
+      - 11:00
+      - 12:00
+  C:
     locations:
       - 3
       - 4
     times:
-      - 10:25
-      - 11:15
-      - 12:05
-      - 12:55
-      - 13:45
+      - 10:30
+      - 11:30
+      - 12:30
 clubs:
   Blackheath FC:
     -
@@ -48,29 +34,22 @@ clubs:
     -
       name: Blackheath 2
       group: B
-  Cranbrook RFC:
-    -
-      name: Cranbrook 1
-      group: C
-    -
-      name: Cranbrook 2
-      group: D
   Hampstead RFC:
     -
       name: Hampstead RFC
-      group: A
+      group: C
   Medway RFC:
     -
       name: Medway RFC
-      group: B
+      group: A
   Old Alleynians RFC:
     -
       name: Old Alleynians RFC
-      group: C
+      group: B
   Old Colfeians RFC:
     -
       name: Old Colfeians RFC
-      group: D
+      group: C
   Old Elthamians RFC:
     -
       name: Old Elthamians 1
@@ -84,32 +63,15 @@ clubs:
       group: C
     -
       name: Sevenoaks 2
-      group: D
+      group: A
   Sidcup RFC:
     -
       name: Sidcup 1
-      group: A
+      group: B
     -
       name: Sidcup 2
-      group: B
-  Tonbridge Juddians RFC:
-    -
-      name: Tonbridge Juddians 1
       group: C
-    -
-      name: Tonbridge Juddians 2
-      group: D
   Tunbridge Wells RFC:
     -
-      name: Tunbridge Wells 1
+      name: Tunbridge Wells RFC
       group: A
-    -
-      name: Tunbridge Wells 2
-      group: B
-  Westcombe Park RFC:
-    -
-      name: Westcombe Park 1
-      group: C
-    -
-      name: Westcombe Park 2
-      group: D

@@ -4,7 +4,6 @@ groups:
     locations:
       - 1
       - 2
-      - 3
     times:
       - 10:00
       - 10:40
@@ -15,7 +14,6 @@ groups:
     locations:
       - 1
       - 2
-      - 3
     times:
       - 10:20
       - 11:00
@@ -24,9 +22,8 @@ groups:
       - 13:00
   C:
     locations:
+      - 3
       - 4
-      - 5
-      - 6
     times:
       - 10:00
       - 10:40
@@ -35,9 +32,8 @@ groups:
       - 12:40
   D:
     locations:
+      - 3
       - 4
-      - 5
-      - 6
     times:
       - 10:20
       - 11:00
@@ -46,15 +42,14 @@ groups:
       - 13:00
   E:
     locations:
-      - 7
-      - 8
-      - 9
+      - 5
+      - 6
     times:
-      - 10:20
-      - 11:00
-      - 11:30
-      - 12:20
-      - 13:00
+      - 10:00
+      - 10:40
+      - 11:20
+      - 12:00
+      - 12:40
 clubs:
   Blackheath FC:
     -
@@ -76,87 +71,69 @@ clubs:
     -
       name: Cambridge 3
       group: C
-  Cranbrook RFC:
-    -
-      name: Cranbrook 1
-      group: D
-    -
-      name: Cranbrook 2
-      group: E
-  Hampstead RFC:
-    -
-      name: Hampstead RFC
-      group: D
   Medway RFC:
     -
       name: Medway 1
-      group: E
+      group: D
     -
       name: Medway 2
-      group: A
+      group: E
   Old Albanians RFC:
     -
       name: Old Albanians RFC
-      group: B
+      group: D
   Old Alleynians RFC:
     -
       name: Old Alleynians RFC
-      group: C
+      group: E
   Old Colfeians RFC:
     -
       name: Old Colfeians 1
-      group: D
-    -
-      name: Old Colfeians 2
-      group: E
-    -
-      name: Old Colfeians 3
       group: A
     -
-      name: Old Colfeians 4
+      name: Old Colfeians 2
       group: B
+    -
+      name: Old Colfeians 3
+      group: C
+    -
+      name: Old Colfeians 4
+      group: D
   Old Elthamians RFC:
     -
       name: Old Elthamians 1
-      group: C
+      group: E
     -
       name: Old Elthamians 2
-      group: D
+      group: A
     -
       name: Old Elthamians 3
-      group: E
+      group: B
   Sevenoaks RFC:
     -
       name: Sevenoaks 1
-      group: A
+      group: C
     -
       name: Sevenoaks 2
-      group: B
+      group: D
   Sidcup RFC:
     -
       name: Sidcup 1
-      group: C
+      group: E
     -
       name: Sidcup 2
-      group: D
+      group: A
   Tonbridge Juddians RFC:
     -
       name: Tonbridge Juddians 1
-      group: E
+      group: B
     -
       name: Tonbridge Juddians 2
-      group: A
+      group: C
   Tunbridge Wells RFC:
     -
       name: Tunbridge Wells 1
-      group: B
-    -
-      name: Tunbridge Wells 2
-      group: C
-  Westcombe Park RFC:
-    -
-      name: Westcombe Park 1
       group: D
     -
-      name: Westcombe Park 2
+      name: Tunbridge Wells 2
       group: E
