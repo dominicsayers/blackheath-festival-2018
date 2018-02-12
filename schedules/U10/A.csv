@@ -1,6 +1,6 @@
-Time,Pitch 1,Pitch 2
-10:00,Cambridge 1 v Old Colfeians 1,Blackheath 1 v Sidcup 2
-10:40,Old Colfeians 1 v Old Elthamians 2,Cambridge 1 v Sidcup 2
-11:20,Blackheath 1 v Old Colfeians 1,Cambridge 1 v Old Elthamians 2
-12:00,Blackheath 1 v Cambridge 1,Old Elthamians 2 v Sidcup 2
-12:40,Blackheath 1 v Old Elthamians 2,Old Colfeians 1 v Sidcup 2
+Time,Pitch 1,Pitch 2,Pitch 3
+10:00,Blackheath 1 v Sidcup 2,Old Elthamians 3 v Tunbridge Wells 2,Cambridge 1 v Old Colfeians 1
+10:40,Old Elthamians 3 v Sidcup 2,Blackheath 1 v Old Colfeians 1,Cambridge 1 v Tunbridge Wells 2
+11:20,Old Colfeians 1 v Sidcup 2,Cambridge 1 v Old Elthamians 3,Blackheath 1 v Tunbridge Wells 2
+12:00,Blackheath 1 v Cambridge 1,Old Colfeians 1 v Old Elthamians 3,Sidcup 2 v Tunbridge Wells 2
+12:40,Old Colfeians 1 v Tunbridge Wells 2,Blackheath 1 v Old Elthamians 3,Cambridge 1 v Sidcup 2

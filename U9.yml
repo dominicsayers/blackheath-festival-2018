@@ -74,11 +74,8 @@ clubs:
       group: A
   Medway RFC:
     -
-      name: Medway 1
+      name: Medway RFC
       group: B
-    -
-      name: Medway 2
-      group: C
   Old Albanians RFC:
     -
       name: Old Albanians 1
@@ -96,6 +93,10 @@ clubs:
       group: B
     -
       name: Old Colfeians 2
+      group: C
+  Old Dunstonian RFC:
+    -
+      name: Old Dunstonian RFC
       group: C
   Old Elthamians RFC:
     -
