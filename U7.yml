@@ -35,6 +35,17 @@ groups:
       - 12:00
   D:
     locations:
+      - 4
+      - 5
+      - 6
+    times:
+      - 10:15
+      - 10:45
+      - 11:15
+      - 11:45
+      - 12:15
+  E:
+    locations:
       - 7
       - 8
     times:
@@ -43,7 +54,7 @@ groups:
       - 11:20
       - 12:00
       - 12:40
-  E:
+  F:
     locations:
       - 7
       - 8
@@ -53,16 +64,6 @@ groups:
       - 11:40
       - 12:20
       - 13:00
-  F:
-    locations:
-      - 9
-      - 10
-    times:
-      - 10:00
-      - 10:40
-      - 11:20
-      - 12:00
-      - 12:40
 clubs:
   Blackheath FC:
     -
@@ -89,6 +90,10 @@ clubs:
     -
       name: Blackheath 8
       group: B
+  Hackney RFC:
+    -
+      name: Hackney Bulls
+      group: D
   Hampstead RFC:
     -
       name: Hampstead RFC
