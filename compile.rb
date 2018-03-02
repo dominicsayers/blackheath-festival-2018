@@ -11,5 +11,5 @@ Dir.glob('categories/*/').each do |subfolder|
   puts schedule
 
   File.open("festival/#{schedule.category.name}.md", "wb") { |file| file.puts schedule }
-  File.open("../blackheathfc.github.io/festival/#{schedule.category.name}.md", "wb") { |file| file.puts schedule }
+  # File.open("../../blackheathfc/blackheathfc.github.io/festival/#{schedule.category.name}.md", "wb") { |file| file.puts schedule }
 end
