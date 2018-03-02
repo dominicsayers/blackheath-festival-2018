@@ -22,20 +22,44 @@ class Schedule
 
   def process_template
     @group = nil
-    result = ["# #{category.name} schedule", ''] + @template.map { |line| process_text(line.strip) }
+    result = front_matter_header + front_matter_content + header + content
     result.compact.flatten.join("\n")
   end
 
-  def process_text(line)
+  def process_text(line, type = :markdown)
     if line == ''
-      @group.finish
+      @group.finish(type)
     elsif line.match?(/^Group/)
       @group = Group.new(category)
-      ["## #{line}", '']
+      @group.header(line, type)
     elsif line.match?(/^Time/)
       @group.add_pitches line
     elsif line.match?(/^00:/)
       @group.add_matches line
     end
+  end
+
+  def front_matter_header
+    [
+      '---',
+      "title: #{category.name} schedule",
+      'groups:'
+    ]
+  end
+
+  def front_matter_content
+    @template.map { |line| process_text(line.strip, :front_matter) }
+  end
+
+  def header
+    [
+      '---',
+      "# #{category.name} schedule",
+      ''
+    ]
+  end
+
+  def content
+    @template.map { |line| process_text(line.strip) }
   end
 end
