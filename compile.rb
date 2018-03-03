@@ -28,5 +28,5 @@ Dir.glob('categories/*/').each do |subfolder|
   pagename = folder.join 'pitches.md'
   put_file pagename, schedule.pitches
   remote_pagename = Pathname.new File.join('..', 'blackheathfc.github.io', pagename)
-  put_file remote_pagename, schedule.matches
+  put_file remote_pagename, schedule.pitches
 end
