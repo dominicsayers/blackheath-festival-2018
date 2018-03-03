@@ -7,14 +7,15 @@ require_relative 'group'
 class Schedule
   attr_reader :category
 
-  def to_s
-    @to_s ||= process_template
+  def matches
+    @matches ||= process_template
   end
 
   private
 
-  def initialize(subfolder)
-    @category = Category.new(subfolder)
+  def initialize(subfolder, date_text)
+    @category = Category.new(subfolder, date_text)
+    @date_text = date_text
 
     template_file = "../festival-templates/schedules/#{category.template_name}.csv"
     @template = File.readlines(template_file)
@@ -42,7 +43,8 @@ class Schedule
   def front_matter_header
     [
       '---',
-      "title: #{category.name} schedule",
+      "title: #{category.name}",
+      'style: schedule',
       'groups:'
     ]
   end
@@ -52,14 +54,14 @@ class Schedule
   end
 
   def header
-    [
-      '---',
-      "# #{category.name} schedule",
-      ''
-    ]
+    ['---']
   end
 
   def content
-    @template.map { |line| process_text(line.strip) }
+    # @template.map { |line| process_text(line.strip) }
+    [
+      '',
+      '{% include schedule_groups.md %}'
+    ]
   end
 end

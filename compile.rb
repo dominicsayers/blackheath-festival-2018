@@ -13,15 +13,14 @@ def put_file(pathname, text)
 end
 
 Dir.glob('categories/*/').each do |subfolder|
-  schedule = Schedule.new subfolder
+  schedule = Schedule.new subfolder, "2018-04-29"
   pagename = Pathname.new File.join('festival2018', schedule.category.name.downcase, 'schedule.md')
 
   puts pagename.dirname
   puts schedule.category
-  # puts schedule
 
-  put_file pagename, schedule
+  put_file pagename, schedule.matches
 
   remote_pagename = Pathname.new File.join('..', 'blackheathfc.github.io', pagename)
-  put_file remote_pagename, schedule
+  put_file remote_pagename, schedule.matches
 end
