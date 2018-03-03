@@ -1,7 +1,7 @@
 ---
 title: U10
 style: schedule
-groups:
+items:
   Group A:
     Twickenham:
       -

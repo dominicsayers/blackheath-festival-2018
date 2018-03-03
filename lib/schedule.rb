@@ -8,7 +8,11 @@ class Schedule
   attr_reader :category
 
   def matches
-    @matches ||= process_template
+    @matches ||= matches_from_template
+  end
+
+  def pitches
+    @pitches ||= pitches_from_list
   end
 
   private
@@ -21,9 +25,14 @@ class Schedule
     @template = File.readlines(template_file)
   end
 
-  def process_template
+  def pitches_from_list
+    result = front_matter_header('pitch_list') + front_matter_pitch_list + header + content('pitch_list')
+    result.compact.flatten.join("\n")
+  end
+
+  def matches_from_template
     @group = nil
-    result = front_matter_header + front_matter_content + header + content
+    result = front_matter_header('schedule') + front_matter_content + header + content('schedule_groups')
     result.compact.flatten.join("\n")
   end
 
@@ -40,12 +49,12 @@ class Schedule
     end
   end
 
-  def front_matter_header
+  def front_matter_header(style)
     [
       '---',
       "title: #{category.name}",
-      'style: schedule',
-      'groups:'
+      "style: #{style}",
+      'items:'
     ]
   end
 
@@ -53,15 +62,19 @@ class Schedule
     @template.map { |line| process_text(line.strip, :front_matter) }
   end
 
+  def front_matter_pitch_list
+    category.pitches.map { |pitch| "  - #{pitch}" }
+  end
+
   def header
     ['---']
   end
 
-  def content
+  def content(include_file)
     # @template.map { |line| process_text(line.strip) }
     [
       '',
-      '{% include schedule_groups.md %}'
+      "{% include #{include_file}.md %}"
     ]
   end
 end

@@ -15,7 +15,7 @@ class Category
     @subfolder = subfolder
     @name = subfolder.split('/')[1]
     @pitches = list_of 'pitches'
-    @times = list_of('times').map { |time| "#{date_text} #{time}"}
+    @times = list_of('times').map { |time| "#{date_text} #{time}" }
     @teams = list_of 'teams'
     @template_name = teams.length
   end
