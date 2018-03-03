@@ -7,14 +7,21 @@
 require 'pathname'
 require_relative 'lib/schedule'
 
+def put_file(pathname, text)
+  FileUtils.mkdir_p pathname.dirname
+  File.open(pathname, 'wb') { |file| file.puts text }
+end
+
 Dir.glob('categories/*/').each do |subfolder|
-  pagename = Pathname.new('festival2018', schedule.category.name.downcase, 'schedule.md')
-  puts pagename.basename
+  schedule = Schedule.new subfolder
+  pagename = Pathname.new File.join('festival2018', schedule.category.name.downcase, 'schedule.md')
 
-  schedule = Schedule.new(subfolder)
+  puts pagename.dirname
   puts schedule.category
-  puts schedule
+  # puts schedule
 
-  File.open(pagename, 'wb') { |file| file.puts schedule }
-  File.open(File.join('..', 'blackheathfc.github.io', pagename), 'wb') { |file| file.puts schedule }
+  put_file pagename, schedule
+
+  remote_pagename = Pathname.new File.join('..', 'blackheathfc.github.io', pagename)
+  put_file remote_pagename, schedule
 end
