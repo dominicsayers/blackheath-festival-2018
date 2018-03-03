@@ -262,4 +262,4 @@ items:
         away: Tunbridge Wells 2
 ---
 
-{% include schedule_groups.md %}
+{% include schedule_groups.html %}

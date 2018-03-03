@@ -14,4 +14,4 @@ items:
   - Franklin's Gardens
 ---
 
-{% include pitch_list.md %}
+{% include pitch_list.html %}

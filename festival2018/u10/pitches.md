@@ -10,4 +10,4 @@ items:
   - Stadio Olimpico
 ---
 
-{% include pitch_list.md %}
+{% include pitch_list.html %}

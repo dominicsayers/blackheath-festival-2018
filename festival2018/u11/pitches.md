@@ -8,4 +8,4 @@ items:
   - Murrayfield
 ---
 
-{% include pitch_list.md %}
+{% include pitch_list.html %}

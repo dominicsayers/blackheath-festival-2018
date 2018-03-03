@@ -260,4 +260,4 @@ items:
         away: Tonbridge Juddians 2
 ---
 
-{% include schedule_groups.md %}
+{% include schedule_groups.html %}

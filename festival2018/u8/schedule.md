@@ -304,4 +304,4 @@ items:
         away: Old Elthamians 3
 ---
 
-{% include schedule_groups.md %}
+{% include schedule_groups.html %}

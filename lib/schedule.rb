@@ -74,7 +74,7 @@ class Schedule
     # @template.map { |line| process_text(line.strip) }
     [
       '',
-      "{% include #{include_file}.md %}"
+      "{% include #{include_file}.html %}"
     ]
   end
 end

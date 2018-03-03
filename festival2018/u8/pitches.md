@@ -11,4 +11,4 @@ items:
   - Ellis Park
 ---
 
-{% include pitch_list.md %}
+{% include pitch_list.html %}
