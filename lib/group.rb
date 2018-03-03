@@ -4,7 +4,7 @@ class Group
   def add_pitches(line)
     elements = line.split(',')[1, 99]
     pitch_numbers = elements.map { |t| t.split(' ')[1].to_i }
-    @pitches = pitch_numbers.map { |n| category.pitches[n] }
+    @pitches = pitch_numbers.map { |n| category.pitches[n - 1] }
 
     nil
   end

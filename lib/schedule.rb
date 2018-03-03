@@ -22,7 +22,15 @@ class Schedule
 
   def process_template
     @group = nil
-    result = ["# #{category.name} schedule", ''] + @template.map { |line| process_text(line.strip) }
+
+    result = [
+      '---',
+      "title: #{category.name} schedule",
+      '---',
+      "# #{category.name} schedule",
+      ''
+    ] + @template.map { |line| process_text(line.strip) }
+
     result.compact.flatten.join("\n")
   end
 
@@ -31,7 +39,7 @@ class Schedule
       @group.finish
     elsif line.match?(/^Group/)
       @group = Group.new(category)
-      ["## #{line}", '']
+      ['---', '', "## #{line}", '']
     elsif line.match?(/^Time/)
       @group.add_pitches line
     elsif line.match?(/^00:/)

@@ -10,6 +10,7 @@ Dir.glob('categories/*/').each do |subfolder|
   puts schedule.category
   puts schedule
 
-  File.open("festival/#{schedule.category.name}.md", "wb") { |file| file.puts schedule }
-  File.open("../blackheathfc.github.io/festival/#{schedule.category.name}.md", "wb") { |file| file.puts schedule }
+  pagename = File.join("festival", "#{schedule.category.name.downcase}.md")
+  File.open(pagename, "wb") { |file| file.puts schedule }
+  File.open(File.join("..", "blackheathfc.github.io", pagename), "wb") { |file| file.puts schedule }
 end
