@@ -36,7 +36,7 @@ class Schedule
     result.compact.flatten.join("\n")
   end
 
-  def process_text(line)
+  def matches_from_text(line)
     if line == ''
       @group.finish
     elsif line.match?(/^Group/)
@@ -59,7 +59,7 @@ class Schedule
   end
 
   def front_matter_matches
-    @template.map { |line| process_text(line.strip) }
+    @template.map { |line| matches_from_text(line.strip) }
   end
 
   def front_matter_pitch_list
