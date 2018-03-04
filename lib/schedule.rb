@@ -32,7 +32,7 @@ class Schedule
 
   def matches_from_template
     @group = nil
-    result = front_matter_header('schedule') + front_matter_content + header + content('schedule_groups')
+    result = front_matter_header('schedule') + front_matter_matches + header + content('schedule_groups')
     result.compact.flatten.join("\n")
   end
 
@@ -58,7 +58,7 @@ class Schedule
     ]
   end
 
-  def front_matter_content
+  def front_matter_matches
     @template.map { |line| process_text(line.strip) }
   end
 
