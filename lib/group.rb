@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 class Group
-  def header(line, type)
-    case type
-    when :markdown
-      ['---', '', "## #{line}", '']
-    when :front_matter
-      ["  #{line}:"]
-    end
+  def header(line)
+    ["  #{line}:"]
   end
 
   def add_pitches(line)
@@ -31,33 +26,7 @@ class Group
     nil
   end
 
-  def finish(type = :markdown)
-    case type
-    when :markdown
-      finish_markdown
-    when :front_matter
-      finish_front_matter
-    end
-  end
-
-  def finish_markdown
-    data = []
-
-    pitches.each_with_index do |pitch, pitch_index|
-      data << "### #{pitch}"
-      data << ''
-
-      times.each_with_index do |time, time_index|
-        data << "| #{time} | #{home[time_index][pitch_index]} | v | #{away[time_index][pitch_index]} |"
-      end
-
-      data << ''
-    end
-
-    data
-  end
-
-  def finish_front_matter
+  def finish
     data = []
 
     pitches.each_with_index do |pitch, pitch_index|

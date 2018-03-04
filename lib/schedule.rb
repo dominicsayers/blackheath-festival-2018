@@ -36,12 +36,12 @@ class Schedule
     result.compact.flatten.join("\n")
   end
 
-  def process_text(line, type = :markdown)
+  def process_text(line)
     if line == ''
-      @group.finish(type)
+      @group.finish
     elsif line.match?(/^Group/)
       @group = Group.new(category)
-      @group.header(line, type)
+      @group.header(line)
     elsif line.match?(/^Time/)
       @group.add_pitches line
     elsif line.match?(/^00:/)
@@ -59,7 +59,7 @@ class Schedule
   end
 
   def front_matter_content
-    @template.map { |line| process_text(line.strip, :front_matter) }
+    @template.map { |line| process_text(line.strip) }
   end
 
   def front_matter_pitch_list
@@ -71,7 +71,6 @@ class Schedule
   end
 
   def content(include_file)
-    # @template.map { |line| process_text(line.strip) }
     [
       '',
       "{% include #{include_file}.html %}"
