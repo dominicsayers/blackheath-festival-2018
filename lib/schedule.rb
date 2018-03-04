@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'fileutils'
-require_relative 'category'
-require_relative 'group'
+require 'category'
+require 'group'
 
 class Schedule
   attr_reader :category
