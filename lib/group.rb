@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
+require 'active_support/inflector'
+
 class Group
+  attr_reader :pitches, :times
+  attr_accessor :name
+
   def header(line)
     ["  #{line}:"]
   end
@@ -16,7 +21,7 @@ class Group
   def add_matches(line)
     elements = line.split(',')
 
-    times << time_from(elements.shift)
+    times << elements.shift
     teams = [[], []]
 
     elements.each { |element| process_element(teams, element) }
@@ -26,7 +31,7 @@ class Group
     nil
   end
 
-  def finish
+  def match_schedule
     data = []
 
     pitches.each_with_index do |pitch, pitch_index|
@@ -37,9 +42,29 @@ class Group
     data
   end
 
+  def pitch_schedule
+    data = {}
+
+    pitches.each_with_index do |pitch, pitch_index|
+      times.each_with_index do |time, time_index|
+        time_key = time_key_from(time)
+
+        data[pitch.parameterize] ||= { pitch_name: pitch }
+        data[pitch.parameterize][time_key] = {
+          'time' => time_from_key(time_key),
+          'group' => name,
+          'home' => home[time_index][pitch_index],
+          'away' => away[time_index][pitch_index]
+        }
+      end
+    end
+
+    data
+  end
+
   private
 
-  attr_reader :category, :pitches, :times, :home, :away
+  attr_reader :category, :home, :away
 
   INDENT = '        '
 
@@ -55,19 +80,31 @@ class Group
     (0..1).each { |i| teams[i] << team_from(ids[i]) }
   end
 
-  def time_from(text)
+  def time_key_from(text)
     time_index = text.split(':')[1].to_i
-    category.times[time_index - 1]
+  end
+
+  def time_from_key(time_key)
+    category.times[time_key - 1]
+  end
+
+  def time_from(text)
+    time_from_key time_key_from(text)
   end
 
   def team_from(index)
     category.teams[index.to_i]
   end
 
-  def front_matter_section(time, time_index, pitch_index)
-    [
+  def front_matter_section(time, time_index, pitch_index, name = nil)
+    front_matter = [
       '      -',
-      "#{INDENT}time: #{time}",
+      "#{INDENT}time: #{time_from(time)}"
+    ]
+
+    front_matter << "#{INDENT}group: #{name}" if name
+
+    front_matter + [
       "#{INDENT}home: #{home[time_index][pitch_index]}",
       "#{INDENT}away: #{away[time_index][pitch_index]}"
     ]

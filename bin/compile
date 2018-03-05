@@ -4,6 +4,6 @@
 $LOAD_PATH.unshift('lib')
 require 'compiler'
 
-Compiler.run
+Compiler.new(remote: true).run
 
 puts 'done'

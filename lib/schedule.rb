@@ -12,7 +12,11 @@ class Schedule
   end
 
   def pitches
-    @pitches ||= pitches_from_list
+    @pitches ||= pitches_from_template
+  end
+
+  def pitch_list
+    @pitch_list ||= pitches_from_list
   end
 
   private
@@ -31,21 +35,44 @@ class Schedule
   end
 
   def matches_from_template
-    @group = nil
     result = front_matter_header('schedule') + front_matter_matches + header + content('schedule_groups')
     result.compact.flatten.join("\n")
   end
 
-  def matches_from_text(line)
+  def pitches_from_template
+    front_matter_pitches.map do |pitch_key, pitch_data|
+      pitch_name = pitch_data.delete(:pitch_name)
+      sorted_data = pitch_data.sort_by { |k, _| k }.to_h
+      front_matter = front_matter_hash('pitch', pitch_name).merge('items' => sorted_data)
+      result = front_matter.to_yaml + (header + content('schedule_pitch')).join("\n")
+      [pitch_key, result]
+    end.to_h
+  end
+
+  def front_matter_pitches
+    @group = nil
+    @pitches = {}
+    @template.each { |line| pitches_from_text(line.strip) }
+    @pitches
+  end
+
+  def pitches_from_text(line)
     if line == ''
-      @group.finish
+      add_group_pitches
     elsif line.match?(/^Group/)
       @group = Group.new(category)
-      @group.header(line)
+      @group.name = line
     elsif line.match?(/^Time/)
       @group.add_pitches line
     elsif line.match?(/^00:/)
       @group.add_matches line
+    end
+  end
+
+  def add_group_pitches
+    @group.pitch_schedule.each do |pitch_key, pitch_data|
+      @pitches[pitch_key] ||= {}
+      @pitches[pitch_key].merge! pitch_data
     end
   end
 
@@ -58,7 +85,15 @@ class Schedule
     ]
   end
 
+  def front_matter_hash(style, pitch_name)
+    {
+      'title' => "#{category.name} #{pitch_name}",
+      'style' => style
+    }
+  end
+
   def front_matter_matches
+    @group = nil
     @template.map { |line| matches_from_text(line.strip) }
   end
 
@@ -75,5 +110,18 @@ class Schedule
       '',
       "{% include #{include_file}.html %}"
     ]
+  end
+
+  def matches_from_text(line)
+    if line == ''
+      @group.match_schedule
+    elsif line.match?(/^Group/)
+      @group = Group.new(category)
+      @group.header(line)
+    elsif line.match?(/^Time/)
+      @group.add_pitches line
+    elsif line.match?(/^00:/)
+      @group.add_matches line
+    end
   end
 end
