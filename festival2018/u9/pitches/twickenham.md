@@ -1,6 +1,6 @@
 ---
 title: U9 Twickenham
-style: pitch
+style: pitch_schedule
 items:
   1:
     time: 2018-04-29 10:00

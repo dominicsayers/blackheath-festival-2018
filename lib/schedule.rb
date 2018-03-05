@@ -35,7 +35,7 @@ class Schedule
   end
 
   def matches_from_template
-    result = front_matter_header('schedule') + front_matter_matches + header + content('schedule_groups')
+    result = front_matter_header('match_schedule') + front_matter_matches + header + content('schedule_groups')
     result.compact.flatten.join("\n")
   end
 
@@ -43,7 +43,7 @@ class Schedule
     front_matter_pitches.map do |pitch_key, pitch_data|
       pitch_name = pitch_data.delete(:pitch_name)
       sorted_data = pitch_data.sort_by { |k, _| k }.to_h
-      front_matter = front_matter_hash('pitch', pitch_name).merge('items' => sorted_data)
+      front_matter = front_matter_hash('pitch_schedule', pitch_name).merge('items' => sorted_data)
       result = front_matter.to_yaml + (header + content('schedule_pitch')).join("\n")
       [pitch_key, result]
     end.to_h

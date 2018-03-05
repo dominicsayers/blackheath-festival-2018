@@ -1,6 +1,6 @@
 ---
 title: U7 Twickenham
-style: pitch
+style: pitch_schedule
 items:
   11:
     time: 2018-04-29 10:00

@@ -1,6 +1,6 @@
 ---
 title: U9
-style: schedule
+style: match_schedule
 items:
   Group A:
     Twickenham:

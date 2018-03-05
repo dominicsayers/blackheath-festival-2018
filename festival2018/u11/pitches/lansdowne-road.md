@@ -1,6 +1,6 @@
 ---
 title: U11 Lansdowne Road
-style: pitch
+style: pitch_schedule
 items:
   21:
     time: 2018-04-29 10:00
