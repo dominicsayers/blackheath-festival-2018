@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require 'yaml'
 require 'category'
 require 'group'
 
@@ -35,8 +36,28 @@ class Schedule
   end
 
   def matches_from_template
-    result = front_matter_header('match_schedule') + front_matter_matches + header + content('schedule_groups')
-    result.compact.flatten.join("\n")
+    front_matter = front_matter_hash('match_schedule').merge('items' => front_matter_matches)
+    front_matter.to_yaml + (header + content('schedule_groups')).join("\n")
+  end
+
+  def front_matter_matches
+    @group = nil
+    @groups = {}
+    @template.each { |line| matches_from_text(line.strip) }
+    @groups
+  end
+
+  def matches_from_text(line)
+    if line == ''
+      @groups.merge! @group.match_schedule
+    elsif line.match?(/^Group/)
+      @group = Group.new(category)
+      @group.name = line
+    elsif line.match?(/^Time/)
+      @group.add_pitches line
+    elsif line.match?(/^00:/)
+      @group.add_matches line
+    end
   end
 
   def pitches_from_template
@@ -85,16 +106,14 @@ class Schedule
     ]
   end
 
-  def front_matter_hash(style, pitch_name)
+  def front_matter_hash(style, pitch_name = nil)
+    title = category.name
+    title += " #{pitch_name}" if pitch_name
+
     {
-      'title' => "#{category.name} #{pitch_name}",
+      'title' => title,
       'style' => style
     }
-  end
-
-  def front_matter_matches
-    @group = nil
-    @template.map { |line| matches_from_text(line.strip) }
   end
 
   def front_matter_pitch_list
@@ -110,18 +129,5 @@ class Schedule
       '',
       "{% include #{include_file}.html %}"
     ]
-  end
-
-  def matches_from_text(line)
-    if line == ''
-      @group.match_schedule
-    elsif line.match?(/^Group/)
-      @group = Group.new(category)
-      @group.header(line)
-    elsif line.match?(/^Time/)
-      @group.add_pitches line
-    elsif line.match?(/^00:/)
-      @group.add_matches line
-    end
   end
 end

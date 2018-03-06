@@ -32,13 +32,23 @@ class Group
   end
 
   def match_schedule
-    data = []
+    data = { name => {} }
 
     pitches.each_with_index do |pitch, pitch_index|
-      data << "    #{pitch}:"
-      times.each_with_index { |time, time_index| data += front_matter_section(time, time_index, pitch_index) }
+      puts "Adding #{pitch}" # debug
+      data[name][pitch] = []
+
+      times.each_with_index do |time, time_index|
+        puts "  Adding #{time_from(time)}" # debug
+        data[name][pitch] << {
+          'time' => time_from(time),
+          'home' => home[time_index][pitch_index],
+          'away' => away[time_index][pitch_index]
+        }
+      end
     end
 
+    puts data # debug
     data
   end
 
