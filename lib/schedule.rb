@@ -32,12 +32,12 @@ class Schedule
 
   def pitches_from_list
     front_matter = front_matter_hash('pitch_list').merge('items' => category.pitches)
-    front_matter.to_yaml + (header + content('pitch_list')).join("\n")
+    front_matter.to_yaml + (content('pitch_list')).join("\n")
   end
 
   def matches_from_template
     front_matter = front_matter_hash('match_schedule').merge('items' => front_matter_matches)
-    front_matter.to_yaml + (header + content('schedule_groups')).join("\n")
+    front_matter.to_yaml + (content('schedule_groups')).join("\n")
   end
 
   def front_matter_matches
@@ -65,7 +65,7 @@ class Schedule
       pitch_name = pitch_data.delete(:pitch_name)
       sorted_data = pitch_data.sort_by { |k, _| k }.to_h
       front_matter = front_matter_hash('pitch_schedule', pitch_name).merge('items' => sorted_data)
-      result = front_matter.to_yaml + (header + content('schedule_pitch')).join("\n")
+      result = front_matter.to_yaml + (content('schedule_pitch')).join("\n")
       [pitch_key, result]
     end.to_h
   end
@@ -116,12 +116,9 @@ class Schedule
     }
   end
 
-  def header
-    ['---']
-  end
-
   def content(include_file)
     [
+      '---',
       '',
       "{% include #{include_file}.html %}"
     ]
