@@ -31,8 +31,8 @@ class Schedule
   end
 
   def pitches_from_list
-    result = front_matter_header('pitch_list') + front_matter_pitch_list + header + content('pitch_list')
-    result.compact.flatten.join("\n")
+    front_matter = front_matter_hash('pitch_list').merge('items' => category.pitches)
+    front_matter.to_yaml + (header + content('pitch_list')).join("\n")
   end
 
   def matches_from_template
@@ -114,10 +114,6 @@ class Schedule
       'title' => title,
       'style' => style
     }
-  end
-
-  def front_matter_pitch_list
-    category.pitches.map { |pitch| "  - #{pitch}" }
   end
 
   def header
