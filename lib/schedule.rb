@@ -32,12 +32,22 @@ class Schedule
 
   def pitches_from_list
     front_matter = front_matter_hash('pitch_list').merge('items' => category.pitches)
-    front_matter.to_yaml + (content('pitch_list')).join("\n")
+    front_matter.to_yaml + content('pitch_list').join("\n")
   end
 
   def matches_from_template
     front_matter = front_matter_hash('match_schedule').merge('items' => front_matter_matches)
-    front_matter.to_yaml + (content('schedule_groups')).join("\n")
+    front_matter.to_yaml + content('schedule_groups').join("\n")
+  end
+
+  def pitches_from_template
+    front_matter_pitches.map do |pitch_key, pitch_data|
+      pitch_name = pitch_data.delete(:pitch_name)
+      sorted_data = pitch_data.sort_by { |k, _| k }.to_h
+      front_matter = front_matter_hash('pitch_schedule', pitch_name).merge('items' => sorted_data)
+      result = front_matter.to_yaml + content('schedule_pitch').join("\n")
+      [pitch_key, result]
+    end.to_h
   end
 
   def front_matter_matches
@@ -45,6 +55,13 @@ class Schedule
     @groups = {}
     @template.each { |line| matches_from_text(line.strip) }
     @groups
+  end
+
+  def front_matter_pitches
+    @group = nil
+    @pitches = {}
+    @template.each { |line| pitches_from_text(line.strip) }
+    @pitches
   end
 
   def matches_from_text(line)
@@ -58,23 +75,6 @@ class Schedule
     elsif line.match?(/^00:/)
       @group.add_matches line
     end
-  end
-
-  def pitches_from_template
-    front_matter_pitches.map do |pitch_key, pitch_data|
-      pitch_name = pitch_data.delete(:pitch_name)
-      sorted_data = pitch_data.sort_by { |k, _| k }.to_h
-      front_matter = front_matter_hash('pitch_schedule', pitch_name).merge('items' => sorted_data)
-      result = front_matter.to_yaml + (content('schedule_pitch')).join("\n")
-      [pitch_key, result]
-    end.to_h
-  end
-
-  def front_matter_pitches
-    @group = nil
-    @pitches = {}
-    @template.each { |line| pitches_from_text(line.strip) }
-    @pitches
   end
 
   def pitches_from_text(line)
