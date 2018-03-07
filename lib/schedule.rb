@@ -53,20 +53,25 @@ class Schedule
   def front_matter_matches
     @group = nil
     @groups = {}
-    @template.each { |line| matches_from_text(line.strip) }
+    @template.each { |line| parse_text(line.strip, type: :match) }
     @groups
   end
 
   def front_matter_pitches
     @group = nil
     @pitches = {}
-    @template.each { |line| pitches_from_text(line.strip) }
+    @template.each { |line| parse_text(line.strip, type: :pitch) }
     @pitches
   end
 
-  def matches_from_text(line)
+  def parse_text(line, type:)
     if line == ''
-      @groups.merge! @group.match_schedule
+      case type
+      when :match
+        add_group_matches
+      when :pitch
+        add_group_pitches
+      end
     elsif line.match?(/^Group/)
       @group = Group.new(category)
       @group.name = line
@@ -77,17 +82,8 @@ class Schedule
     end
   end
 
-  def pitches_from_text(line)
-    if line == ''
-      add_group_pitches
-    elsif line.match?(/^Group/)
-      @group = Group.new(category)
-      @group.name = line
-    elsif line.match?(/^Time/)
-      @group.add_pitches line
-    elsif line.match?(/^00:/)
-      @group.add_matches line
-    end
+  def add_group_matches
+    @groups.merge! @group.match_schedule
   end
 
   def add_group_pitches
