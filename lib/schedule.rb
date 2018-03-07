@@ -9,15 +9,21 @@ class Schedule
   attr_reader :category
 
   def matches
-    @matches ||= matches_from_template
+    @matches ||= content('match_schedule', front_matter_matches, 'schedule_groups')
   end
 
   def pitches
-    @pitches ||= pitches_from_template
+    @pitches ||= begin
+      front_matter_pitches.map do |pitch_key, pitch_data|
+        pitch_name = pitch_data.delete(:pitch_name)
+        sorted_data = pitch_data.sort_by { |k, _| k }.to_h
+        [pitch_key, content('pitch_schedule', sorted_data, 'schedule_pitch', pitch_name: pitch_name)]
+      end.to_h
+    end
   end
 
   def pitch_list
-    @pitch_list ||= pitches_from_list
+    @pitch_list ||= content('pitch_list', category.pitches, 'pitch_list')
   end
 
   private
@@ -28,26 +34,6 @@ class Schedule
 
     template_file = "../festival-templates/schedules/#{category.template_name}.csv"
     @template = File.readlines(template_file)
-  end
-
-  def pitches_from_list
-    front_matter = front_matter_hash('pitch_list').merge('items' => category.pitches)
-    front_matter.to_yaml + content('pitch_list').join("\n")
-  end
-
-  def matches_from_template
-    front_matter = front_matter_hash('match_schedule').merge('items' => front_matter_matches)
-    front_matter.to_yaml + content('schedule_groups').join("\n")
-  end
-
-  def pitches_from_template
-    front_matter_pitches.map do |pitch_key, pitch_data|
-      pitch_name = pitch_data.delete(:pitch_name)
-      sorted_data = pitch_data.sort_by { |k, _| k }.to_h
-      front_matter = front_matter_hash('pitch_schedule', pitch_name).merge('items' => sorted_data)
-      result = front_matter.to_yaml + content('schedule_pitch').join("\n")
-      [pitch_key, result]
-    end.to_h
   end
 
   def front_matter_matches
@@ -66,12 +52,7 @@ class Schedule
 
   def parse_text(line, type:)
     if line == ''
-      case type
-      when :match
-        add_group_matches
-      when :pitch
-        add_group_pitches
-      end
+      finish_group type
     elsif line.match?(/^Group/)
       @group = Group.new(category)
       @group.name = line
@@ -79,6 +60,15 @@ class Schedule
       @group.add_pitches line
     elsif line.match?(/^00:/)
       @group.add_matches line
+    end
+  end
+
+  def finish_group(type)
+    case type
+    when :match
+      add_group_matches
+    when :pitch
+      add_group_pitches
     end
   end
 
@@ -93,21 +83,17 @@ class Schedule
     end
   end
 
-  def front_matter_hash(style, pitch_name = nil)
+  def content(style, items, include_file, pitch_name: nil)
     title = category.name
     title += " #{pitch_name}" if pitch_name
 
     {
       'title' => title,
       'style' => style
-    }
-  end
+    }.merge('items' => items).to_yaml + <<~CONTENT
+      ---
 
-  def content(include_file)
-    [
-      '---',
-      '',
-      "{% include #{include_file}.html %}"
-    ]
+      {% include #{include_file}.html %}
+    CONTENT
   end
 end
