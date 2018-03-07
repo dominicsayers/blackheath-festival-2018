@@ -88,7 +88,7 @@ class Group
   end
 
   def time_key_from(text)
-    time_index = text.split(':')[1].to_i
+    text.split(':')[1].to_i
   end
 
   def time_from_key(time_key)
