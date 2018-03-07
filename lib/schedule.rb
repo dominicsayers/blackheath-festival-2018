@@ -9,12 +9,12 @@ class Schedule
   attr_reader :category
 
   def matches
-    @matches ||= content('match_schedule', front_matter_matches, 'schedule_groups')
+    @matches ||= content('match_schedule', front_matter(:match), 'schedule_groups')
   end
 
   def pitches
     @pitches ||= begin
-      front_matter_pitches.map do |pitch_key, pitch_data|
+      front_matter(:pitch).map do |pitch_key, pitch_data|
         pitch_name = pitch_data.delete(:pitch_name)
         sorted_data = pitch_data.sort_by { |k, _| k }.to_h
         [pitch_key, content('pitch_schedule', sorted_data, 'schedule_pitch', pitch_name: pitch_name)]
@@ -36,18 +36,11 @@ class Schedule
     @template = File.readlines(template_file)
   end
 
-  def front_matter_matches
+  def front_matter(type)
     @group = nil
-    @groups = {}
-    @template.each { |line| parse_text(line.strip, type: :match) }
-    @groups
-  end
-
-  def front_matter_pitches
-    @group = nil
-    @pitches = {}
-    @template.each { |line| parse_text(line.strip, type: :pitch) }
-    @pitches
+    @collection = {}
+    @template.each { |line| parse_text(line.strip, type: type) }
+    @collection
   end
 
   def parse_text(line, type:)
@@ -73,13 +66,13 @@ class Schedule
   end
 
   def add_group_matches
-    @groups.merge! @group.match_schedule
+    @collection.merge! @group.match_schedule
   end
 
   def add_group_pitches
     @group.pitch_schedule.each do |pitch_key, pitch_data|
-      @pitches[pitch_key] ||= {}
-      @pitches[pitch_key].merge! pitch_data
+      @collection[pitch_key] ||= {}
+      @collection[pitch_key].merge! pitch_data
     end
   end
 
