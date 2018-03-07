@@ -38,11 +38,7 @@ class Group
       data[name][pitch] = []
 
       times.each_with_index do |time, time_index|
-        data[name][pitch] << {
-          'time' => time_from(time),
-          'home' => home[time_index][pitch_index],
-          'away' => away[time_index][pitch_index]
-        }
+        data[name][pitch] << match_data_for(time, time_index, pitch_index)
       end
     end
 
@@ -55,14 +51,8 @@ class Group
     pitches.each_with_index do |pitch, pitch_index|
       times.each_with_index do |time, time_index|
         time_key = time_key_from(time)
-
         data[pitch.parameterize] ||= { pitch_name: pitch }
-        data[pitch.parameterize][time_key] = {
-          'time' => time_from_key(time_key),
-          'group' => name,
-          'home' => home[time_index][pitch_index],
-          'away' => away[time_index][pitch_index]
-        }
+        data[pitch.parameterize][time_key] = match_data_for(time, time_index, pitch_index, group: true)
       end
     end
 
@@ -80,6 +70,14 @@ class Group
     @times = []
     @home = []
     @away = []
+  end
+
+  def match_data_for(time, time_index, pitch_index, group: false)
+    {
+      'time' => time_from(time),
+      'home' => home[time_index][pitch_index],
+      'away' => away[time_index][pitch_index]
+    }.merge(group ? { 'group' => name } : {})
   end
 
   def process_element(teams, element)

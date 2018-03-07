@@ -4,54 +4,54 @@ style: pitch_schedule
 items:
   1:
     time: 2018-04-29 10:00
-    group: Group A
     home: Bromley
     away: Old Albanians 1
+    group: Group A
   2:
     time: 2018-04-29 10:20
-    group: Group B
     home: Old Albanians 2
     away: Old Elthamians 1
+    group: Group B
   3:
     time: 2018-04-29 10:40
-    group: Group A
     home: Bishop's Stortford
     away: Bromley
+    group: Group A
   4:
     time: 2018-04-29 11:00
-    group: Group B
     home: Old Albanians 2
     away: Tunbridge Wells 2
+    group: Group B
   5:
     time: 2018-04-29 11:20
-    group: Group A
     home: Bromley
     away: Old Dunstonians
+    group: Group A
   6:
     time: 2018-04-29 11:40
-    group: Group B
     home: Blackheath 1
     away: Old Albanians 2
+    group: Group B
   7:
     time: 2018-04-29 12:00
-    group: Group A
     home: Bromley
     away: Sevenoaks 2
+    group: Group A
   8:
     time: 2018-04-29 12:20
-    group: Group B
     home: Sidcup 1
     away: Tunbridge Wells 2
+    group: Group B
   9:
     time: 2018-04-29 12:40
-    group: Group A
     home: Old Dunstonians
     away: Sevenoaks 2
+    group: Group A
   10:
     time: 2018-04-29 13:00
-    group: Group B
     home: Old Albanians 2
     away: Sidcup 1
+    group: Group B
 ---
 
 {% include schedule_pitch.html %}
