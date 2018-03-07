@@ -27,7 +27,6 @@ class Compiler
     def initialize(subfolder, configured_options = {})
       @subfolder = subfolder
       @options = DEFAULT_OPTIONS.merge configured_options
-      puts folder # debug
       puts schedule.category
     end
 

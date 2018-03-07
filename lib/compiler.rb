@@ -6,8 +6,6 @@ EVENT_DATE = '2018-04-29'
 
 class Compiler
   def run
-    puts Dir.pwd # debug
-
     Dir.glob('categories/*/').each do |subfolder|
       category_compiler = Compiler::Category.new(subfolder, remote: remote, date_text: EVENT_DATE)
       category_compiler.generate_matches

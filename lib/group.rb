@@ -35,11 +35,9 @@ class Group
     data = { name => {} }
 
     pitches.each_with_index do |pitch, pitch_index|
-      puts "Adding #{pitch}" # debug
       data[name][pitch] = []
 
       times.each_with_index do |time, time_index|
-        puts "  Adding #{time_from(time)}" # debug
         data[name][pitch] << {
           'time' => time_from(time),
           'home' => home[time_index][pitch_index],
@@ -48,7 +46,6 @@ class Group
       end
     end
 
-    puts data # debug
     data
   end
 
