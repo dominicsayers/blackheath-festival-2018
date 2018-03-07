@@ -97,15 +97,6 @@ class Schedule
     end
   end
 
-  def front_matter_header(style)
-    [
-      '---',
-      "title: #{category.name}",
-      "style: #{style}",
-      'items:'
-    ]
-  end
-
   def front_matter_hash(style, pitch_name = nil)
     title = category.name
     title += " #{pitch_name}" if pitch_name
