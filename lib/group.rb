@@ -102,18 +102,4 @@ class Group
   def team_from(index)
     category.teams[index.to_i]
   end
-
-  def front_matter_section(time, time_index, pitch_index, name = nil)
-    front_matter = [
-      '      -',
-      "#{INDENT}time: #{time_from(time)}"
-    ]
-
-    front_matter << "#{INDENT}group: #{name}" if name
-
-    front_matter + [
-      "#{INDENT}home: #{home[time_index][pitch_index]}",
-      "#{INDENT}away: #{away[time_index][pitch_index]}"
-    ]
-  end
 end
